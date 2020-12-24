@@ -43,6 +43,7 @@ function App() {
         <Navbar />
         {/* <Test/> */}
         {/* <Catagories /> */}
+        {/* <Categories /> */}
         {/* <ProviderProf /> */}
         {/* <ProviderView /> */}
         {/* <UserView /> */}
@@ -83,7 +84,7 @@ function App() {
 
         </Switch>
 
-        {/* <Footer /> */}
+        <Footer />
 
       </div>
     </BrowserRouter>
