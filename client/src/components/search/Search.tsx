@@ -6,8 +6,10 @@ import ProviderContainer from "../Provider-container/Provider-container";
 import './Search.css';
 const axios = require('axios');
 const $ = require('jquery');
+require('dotenv').config();
 
 const Search = () => {
+    console.log('aaaaaaaaaaaaaaaaaaaaa', process.env)
     const userInStore = useSelector((state: any) => state.user);
     const dispatch = useDispatch();
 
@@ -25,33 +27,36 @@ const Search = () => {
     //     }]);
 
     const handleClick = async () => {
-            await axios.post(`http://localhost:8000/location/loc/`,      //url for sending the request ?
-                {
-                    name: city,
-                    // category: category
-                })
+        // console.log('aaaaaaaaaaaaaaaaaaaaa',city)
 
-                .then((result: any) => {
-                    console.log("axios", result.data)
-                    dispatch(getProv(result.data[0].name, result.data[0].serviceProviders))  
-                    // setResults(result.data)
-                    // redirect to the provider page  path= '/provider'
+        await axios.post(`http://localhost:8000/location/loc/`,      //url for sending the request ?
+            {
+                name: city,
+                // category: category
+            })
 
-                })
-                .catch((err: any) => {
-                    console.error("err===== =>", err);
-                })
+            .then((result: any) => {
+                console.log("axios", result.data)
+                // dispatch(getProv(result.data[0].name, result.data[0].serviceProviders))  
+                // setResults(result.data)
+                // redirect to the provider page  path= '/provider'
+
+            })
+            .catch((err: any) => {
+                console.error("err===== =>", err);
+            })
         // }
         // console.log("========", result)
         // const handleChange = () => {
 
-        }
-        console.log(category)
+    }
+    console.log(category)
 
-        return (
+    return (
+        <section className="search-sec">
+            <div className="container">
 
-            <div>
-                <input type="text" placeholder="search.."></input>
+                <input type="text" placeholder="search.." className="search-input"></input>
 
                 <div className="cat dropdown">
                     {/* <button className="dropbtn" onClick={()=>{setCat(!cat)}}>Category</button> */}
@@ -71,14 +76,16 @@ const Search = () => {
                         <option>Jenin</option>
                         <option>Tulkarem</option>
                         <option>Jericho</option>
-
-
                     </select>
                 </div>
-                <button  className = "btn-search" onClick={handleClick}>Submit</button>
+                <button className="btn-search" onClick={handleClick}>Search</button>
                 {/* <ProviderContainer results={results} city={city} category={category} /> */}
-            </div>
-        )
-    }
 
-    export default Search;
+            </div>
+
+        </section>
+    )
+}
+
+export default Search;
+

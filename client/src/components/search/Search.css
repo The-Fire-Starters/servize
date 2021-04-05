@@ -47,24 +47,10 @@
 .show {display: block;} 
  */
 
- .dropdown{
-   margin: 10px;
-  position: relative;
-  display: inline-block;
- }
- .dropdown select,.btn-search{
-   background:#0563af;
-   color: #fff;
-   padding:8px 70px ;
-   width: 250px;
-   height: 50px;
-   border: none;
-   font-size: 20px;
-   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
-   -webkit-appearance: button;
-   outline: none;
- }
- .dropdown:before{
+
+ /* ////////////////////////////////////////////////////////// */
+
+ /* .dropdown:before{
    font-family: "Font Awesome 5 Free" ;
    position: absolute;
    top:0;
@@ -72,19 +58,67 @@
    height: 50px;
    text-align: center;
    line-height: 50px;
-   color: #fff;
-   font-size: 28px;
-   background:#007ce0;
+   color: #ffdf6c;
+   font-size: 16px;
+   background: #3f3f3f;;
    pointer-events:none;
- }
- .cat:before{
+ } */
+ /* .cat:before{
   font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f7d9";
  }
  .city:before{
   font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f64f";
+ } */
+
+  .dropdown{
+  margin-right: 5px;
+  position: relative;
+  display: inline-block;
+ }
+ .dropdown select{
+   background:#3f3f3f;
+   color: #ffdf6c;
+   padding: 8px;
+   width: 120px;
+   height: 30px;
+   border: none;
+   font-size: 12px;
+   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
  }
 
- 
- .dropdown:hover::before{
-  background: #0472ca;
+ .btn-search{
+   background:#3f3f3f;
+   color: #ffdf6c;
+   padding: 8px;
+   width: 100px;
+   height: 30px;
+   border: none;
+   font-size: 12px;
+   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
  }
+
+.search-input{
+  margin-right: 5px;
+  width: 150px;
+  height: 30px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0);
+  padding: 8px;
+  text-align: left;
+}
+ 
+ /* .dropdown:hover::before{
+  background: #707070;
+ } */
+ .dropdown select:hover, .btn-search:hover {
+  background: #707070;
+ }
+
+ /* /////////////////////////////////////////////// */
+ .search-sec{
+  /* background: #707070; */
+  /* align-items: center; */
+  /* position: relative ; */
+  margin: 100px 10px;
+  /* display: inline-block; */
+}
+

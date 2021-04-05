@@ -7,15 +7,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import os
+# import os
 
 from pathlib import Path
 
-import django_heroku
+# import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ["servize-web.herokuapp.com", "127.0.0.1","localhost"]
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'accounts',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',            # add this 
     'rest_framework',         # add this
-    # 'django_filters',
+    'django_filters',
+    'djoser',
 
     # add name of applications here
     # 'cal.apps.CalConfig',
@@ -52,13 +53,8 @@ INSTALLED_APPS = [
     'Location',
     'Reviews',
     'User',
-    'djoser',
     
     'schedule',
-    
-    
-    
-
 
 ]
 
@@ -79,7 +75,7 @@ ROOT_URLCONF = 'server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'build')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -209,16 +205,10 @@ DJOSER = {
 
 
 # STATIC_ROOT = Path(__file__, "staticfiles").resolve().parent.parent
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = '/static/'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'build/static')
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 AUTH_USER_MODEL = 'accounts.UserAccount'
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
