@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { appendErrors, useForm } from 'react-hook-form';
-import { signUp } from '../../actions/Users/usersActions';
-import { connect } from 'react-redux'
-import { State } from '../../reducers/Users/usersReducer'
-import { Link, Redirect } from 'react-router-dom';
+import { signUp, openLoginForm } from '../../actions/Users/usersActions';
+// import { State } from '../../reducers/Users/usersReducer'
 import { useSelector, useDispatch } from 'react-redux';
-import Usertype from './Usertype'
+// import Usertype from './Usertype'
 import './Signup.css';
 
-const axios = require('axios');
-const $ = require('jquery');
+import $ from 'jquery';
 
 interface FormData {
     username: string;
@@ -20,50 +17,29 @@ interface FormData {
 const Signup = (props: any) => {
     const userInStore = useSelector((state: any) => state.user);
     const dispatch = useDispatch();
-    // console.log(userInStore)
-    // const openForm= () =>{
-    //     document.getElementById("signup-form").style.display = "block";
-    // }
-
-    const closeForm = () => {
-        //    $("signup-form").style.display = "none";
-        $("#signup-form").hide();
-
-    }
 
     const { register, handleSubmit, errors } = useForm<FormData>();
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [serverErrors, setServerErrors] = useState<Array<string>>([]);
 
-    return (
+    function closeSignupForm() {
+        $("#signup-form").removeClass("showSignupForm");
+        $('.signup-overlay').css({ "display": "none" });
+    }
 
-        <div id="signup" className="center styled">
+    return (
+        <div id="signup" className="center">
+
+            <div className="signup-overlay"></div>
             <form id="signup-form"
                 onSubmit={handleSubmit((formData) => {
 
-                    props.signUp(formData.username, formData.email, formData.password);
-                    // console.log(props)
-
-                    // if (userInStore.user.status === 201) {
-                    //     <Redirect to="/usertype" />
-                    // }
-                    // axios.post(`http://localhost:8000/auth/users/`, {
-                    //     name: formData.username,
-                    //     email: formData.email,
-                    //     password: formData.password,
-
-                    // })
-
-                    //     .then((result: any) => {
-                    //         console.log(result)
-                    //         window.location.href="/user/login" 
-
-                    //     })
-                    //     .catch((err: any) => {
-                    //         console.error("err===== =>", err);
-                    //     })
+                    dispatch(signUp(formData.username, formData.email, formData.password));
                 })}
             >
+
+                <div className="signup-close" onClick={closeSignupForm}>&times;</div>
+
                 <h1>Sign Up</h1>
                 <div className="column">
                     <label htmlFor="username">User Name:</label>
@@ -87,22 +63,15 @@ const Signup = (props: any) => {
                 </div>
 
                 <button className="btn-signup" >Sign Up</button>
-                <button className="btn cancel" onClick={closeForm}>Close</button>
 
-                <div className="password-req" >8 characters or longer. Combine upper and lowercase letters and numbers</div><br />
-                <p >Already have an account? <Link to="/user/login" style={{ textDecoration: "none" }}>Sign In</Link></p>
+                <div className="password-req" >8 characters or longer. Combine upper and lowercase letters, numbers, and special characters</div><br />
+
+                <p >Already have an account? <span style={{ color: "red", cursor: "pointer" }} onClick={() => { closeSignupForm(); openLoginForm() }}>Log In</span></p>
                 {/* {userInStore.user.status ? null : <Redirect to="/usertype" />} */}
             </form>
         </div>
     );
-
 }
 
-const mapStateToProps = (state: State) => ({
-    user: state.user,
-})
-
-const mapDispatchToProps = { signUp }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default Signup;
 

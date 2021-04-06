@@ -7,15 +7,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-import os
+# import os
 
 from pathlib import Path
 
 # import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-# BASE_DIR = Path(__file__).resolve().parent.parent
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Quick-start development settings - unsuitable for production
@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',            # add this 
     'rest_framework',         # add this
-    # 'django_filters',
+    'django_filters',
+    'djoser',
 
     # add name of applications here
     # 'cal.apps.CalConfig',
@@ -52,20 +53,15 @@ INSTALLED_APPS = [
     'Location',
     'Reviews',
     'User',
-    'djoser',
     
     'schedule',
-    
-    
-    
-
 
 ]
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',    # add this for connection between front and back
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware', #kkkk
+    'whitenoise.middleware.WhiteNoiseMiddleware', #kkkk
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -107,7 +103,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'servizeDB', 
         'USER': 'postgres', 
-        'PASSWORD': 'rami871995',
+        'PASSWORD': 'student',
         'HOST': 'localhost', 
         'PORT': '5432',
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -118,7 +114,7 @@ DATABASES = {
         # 'PORT': '5432',
     }
 }
-# WHITENOISE_USE_FINDERS = True
+WHITENOISE_USE_FINDERS = True
 # import dj_database_url
 # db_from_env = dj_database_url.config(conn_max_age=600)
 # DATABASES['default'].update(db_from_env) 
