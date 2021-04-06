@@ -3,8 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { openLoginForm, openSignupForm } from '../../actions/Users/usersActions';
 import { State } from '../../reducers/Users/usersReducer'
 import { useTranslation } from "react-i18next";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { RootStore } from '../../reducers/rootReducer';
 import Button from "@material-ui/core/Button";
 import ProviderSignup from '../Provider-signup/Provider-signup'
 import Logout from '../Logout/Logout';
@@ -37,17 +35,12 @@ const Navbar = () => {
         console.log(e);
     }
 
-    const selectLang = () => {
-
-    }
-
     const openClick = () => {
         document.getElementById("mySidenav").style.width = "200px"
     }
     const closeClick = (e: any) => {
         e.preventDefault();
         document.getElementById("mySidenav").style.width = "0";
-
     }
 
     return (
@@ -61,7 +54,7 @@ const Navbar = () => {
                 <a href="/" className="closebtn" onClick={closeClick}>&times;</a>
                 <a href="#">About</a>
                 <a href="#">{t("how_it_works")}</a>
-                <a href="#">Browse Jobs</a>
+                <a href="#">{t("Browse_Jobs")}</a>
                 <a href="#">Contact</a>
             </div>
 
@@ -75,30 +68,28 @@ const Navbar = () => {
                 <a href="#" className="pc-view">{t("how_it_works")}</a>
                 <a href="#" className="pc-view">{t("Browse_Jobs")}</a>
 
-                {/* <li className="lang-dropdown">
-                        <button onClick={selectLang} className="lang-dropbtn">Languages</button>
-                        < div id="lang-Dropdown pc-view" className="lang-dropdown-content">
-                            <span className="pc-view-lang" onClick={() => i18n.changeLanguage("en")}> English</span>
-                            <span className="pc-view-lang" onClick={() => i18n.changeLanguage("ar")}>عربي</span>
-                        </div>
+                <div className="lang-dropdown">
+                    <button className="lang-dropbtn pc-view">{t("language")}</button>
+                    <div className="lang-dropdown-content">
+                        <span className="pc-view-lang" onClick={() => i18n.changeLanguage("en")}> English</span>
+                        <span className="pc-view-lang" onClick={() => i18n.changeLanguage("ar")}>عربي</span>
+                    </div>
 
-                    </li> */}
+                </div>
+
                 {token === null ?
                     <div className="user-register">
-                        {/* <li><Link to="/user/login">{t("log_in")}</Link></li> */}
                         <div className="pc-view" onClick={openLoginForm}>{t("log_in")}</div>
-                        {/* <li><Link to="/user/signup">{t("join")}</Link></li> */}
                         <div className="pc-view" onClick={openSignupForm}>{t("join")}</div>
-
                     </div>
                     :
-                    <div>
-                        <li><a href="profiles/user">Profile</a></li>
-                        <li>
+                    <div className="user-register">
+                        <div className="pc-view"><a href="profiles/user">{t("profile")}</a></div>
+                        <div className="pc-view">
                             <Button onClick={() => { localStorage.clear(); window.location.href = "/"; }} id="logout">
                                 Logout
                             </Button>
-                        </li>
+                        </div>
                     </div>}
 
                 <div className="toggle-container">
@@ -108,19 +99,6 @@ const Navbar = () => {
                 </div>
 
             </div>
-
-            {/* <div className="select">
-                        <select
-                            value={i18n.language}
-                            onChange={(e) =>{
-                                i18n.changeLanguage(e.target.value)
-                                console.log(e.target.value)
-                            }}
-                        >
-                            <option value="en">English</option>
-                            <option value="ar">عربي</option>
-                        </select>
-                    </div> */}
         </nav>
     )
 }
